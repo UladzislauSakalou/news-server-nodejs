@@ -16,18 +16,24 @@ controller.getArticle = function(req, res, next) {
 }
 
 controller.createArticle = function(req, res, next) {
-    articleService.createArticle(req.body.title);
-    res.status(200).send('Article created');
+    articleService.createArticle(req.body.title)
+        .then(() => {
+            res.status(200).send('Article created');
+        });
 }
 
 controller.updateArticle = function(req, res, next) {
-    articleService.updateArticle(req.params.id, req.body.title);
-    res.status(200).send('Article updated');
+    articleService.updateArticle(req.params.id, req.body.title)
+        .then(() => {
+            res.status(200).send("Article updated");
+        });
 }
 
 controller.deleteArticle = function(req, res, next) {
-    articleService.deleteArticle(req.params.id);
-    res.status(200).send("Article deleted");
+    articleService.deleteArticle(req.params.id)
+        .then(() => {
+            res.status(200).send("Article deleted");
+        });
 }
 
 module.exports = controller
