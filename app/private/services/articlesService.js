@@ -10,8 +10,8 @@ service.getArticle = async function(id) {
     return await Article.findById(id);
 }
 
-service.createArticle = async function(title) {
-    const article = new Article(title);
+service.createArticle = async function(title, urlToImage, content) {
+    const article = new Article({ title: title, urlToImage: urlToImage, content: content });
 
     await article.save(function(err){
         if (err) {
@@ -20,8 +20,8 @@ service.createArticle = async function(title) {
     });
 }
 
-service.updateArticle = async function(id, title) {
-    return await Article.findByIdAndUpdate(id, { title: title }, function(err) {
+service.updateArticle = async function(id, title, urlToImage, content) {
+    return await Article.findByIdAndUpdate(id, { title: title, urlToImage: urlToImage, content: content }, function(err) {
         if (err) {
             console.log(err);
             next(err);
